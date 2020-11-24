@@ -6,8 +6,11 @@ const path = require("path");
 
 const arg = require("arg");
 const fixpack = require("fixpack");
+const globby = require("globby");
 const { Liquid } = require("liquidjs");
 const mkdirp = require("mkdirp");
+
+const cfg = require("./package.json").cfg;
 
 const args = new arg({
   "--name": String
@@ -15,21 +18,25 @@ const args = new arg({
 
 const globals = {
   name: args["--name"],
+  ...cfg
 };
 
 if (!globals.name && args._.length) {
   globals.name = args._[0];
 }
 
-makeDirs([
-  "src/pages"
-]);
-makeFiles([
-  "package.json",
-  ".eleventy.js"
-]);
+const files = globby.sync(path.join(__dirname, "template"), { dot: true });
+console.log(files);
+console.log(globals);
 
+// makeDirs([
+//   "src/pages"
+// ]);
+makeFiles(files);
+
+// Run `npm init -y` to inject user-specific author name, license, etc.
 cp.execSync("npm init -y");
+// Prettify package.json.
 fixpack("./package.json");
 
 function makeDirs(dirs = []) {
@@ -40,9 +47,9 @@ function makeDirs(dirs = []) {
 
 function makeFiles(files = [], engine = new Liquid({globals})) {
   for (const file of files) {
-    const $template = path.join(__dirname, `${file}.liquid`);
-    const $file = fs.readFileSync($template).toString();
-    const output = engine.parseAndRenderSync($file);
-    fs.writeFileSync(file, output.toString());
+    const content = fs.readFileSync(file).toString();
+    const output = engine.parseAndRenderSync(content);
+    const outputFile = file.replace("template/", "./");
+    fs.writeFileSync(outputFile, output);
   }
 }

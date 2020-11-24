@@ -1,8 +1,8 @@
 module.exports = (eleventyConfig) => {
   return {
     dir: {
-      input: "src",
-      output: "www"
+      input: "{{ cfg.dir.input }}",
+      output: "{{ cfg.dir.output }}"
     }
   };
 };
