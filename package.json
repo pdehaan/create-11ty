@@ -3,16 +3,28 @@
   "description": "Create a dummy 11ty site.",
   "version": "1.0.0",
   "author": "Peter deHaan <peter@deseloper.com> (https://about.me/peterdehaan)",
-  "bin": "cli.js",
+  "bin": {
+    "create-11ty": "cli.js"
+  },
+  "bugs": {
+    "url": "https://github.com/pdehaan/create-11ty/issues"
+  },
   "dependencies": {
     "arg": "^5.0.0",
     "liquidjs": "^9.16.1"
   },
+  "devDependencies": {},
+  "homepage": "https://github.com/pdehaan/create-11ty#readme",
   "keywords": [
     "eleventy"
   ],
   "license": "MPL-2.0",
+  "main": "cli.js",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pdehaan/create-11ty.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   }
