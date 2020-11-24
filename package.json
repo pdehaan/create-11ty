@@ -1,0 +1,19 @@
+{
+  "name": "create-11ty",
+  "description": "Create a dummy 11ty site.",
+  "version": "1.0.0",
+  "author": "Peter deHaan <peter@deseloper.com> (https://about.me/peterdehaan)",
+  "bin": "cli.js",
+  "dependencies": {
+    "arg": "^5.0.0",
+    "liquidjs": "^9.16.1"
+  },
+  "keywords": [
+    "eleventy"
+  ],
+  "license": "MPL-2.0",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
