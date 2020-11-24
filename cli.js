@@ -15,6 +15,10 @@ const globals = {
   name: args["--name"],
 };
 
+if (!globals.name) {
+  globals.name = args
+}
+
 const engine = new Liquid({globals});
 
 const files = ["package.json", ".eleventy.js"];
@@ -27,5 +31,6 @@ for (const file of files) {
 }
 
 cp.execSync("npm init -y");
+console.log("npm init started");
 
 console.info("Done!");
