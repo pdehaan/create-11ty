@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+const cp = require("child_process");
 const fs = require("fs");
 const path = require("path");
 
@@ -24,5 +25,7 @@ for (const file of files) {
   const output = engine.parseAndRenderSync($file);
   fs.writeFileSync(file, output.toString());
 }
+
+cp.execSync("npm init -y");
 
 console.info("Done!");
