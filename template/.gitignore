@@ -1,3 +1,0 @@
-node_modules
-
-{{ cfg.dir.output }}
