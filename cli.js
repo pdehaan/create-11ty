@@ -7,6 +7,7 @@ const path = require("path");
 const arg = require("arg");
 const fixpack = require("fixpack");
 const { Liquid } = require("liquidjs");
+const mkdirp = require("mkdirp");
 
 const args = new arg({
   "--name": String
@@ -16,24 +17,32 @@ const globals = {
   name: args["--name"],
 };
 
-if (!globals.name) {
-  globals.name = args
+if (!globals.name && args._.length) {
+  globals.name = args._[0];
 }
 
-const engine = new Liquid({globals});
-
-const files = ["package.json", ".eleventy.js"];
-
-for (const file of files) {
-  const $template = path.join(__dirname, `${file}.liquid`);
-  const $file = fs.readFileSync($template).toString();
-  const output = engine.parseAndRenderSync($file);
-  fs.writeFileSync(file, output.toString());
-}
+makeDirs([
+  "src/pages"
+]);
+makeFiles([
+  "package.json",
+  ".eleventy.js"
+]);
 
 cp.execSync("npm init -y");
-console.log("npm init started");
-
 fixpack("./package.json");
 
-console.info("Done!");
+function makeDirs(dirs = []) {
+  for (const dir of dirs) {
+    mkdirp.sync(dir);
+  }
+}
+
+function makeFiles(files = [], engine = new Liquid({globals})) {
+  for (const file of files) {
+    const $template = path.join(__dirname, `${file}.liquid`);
+    const $file = fs.readFileSync($template).toString();
+    const output = engine.parseAndRenderSync($file);
+    fs.writeFileSync(file, output.toString());
+  }
+}

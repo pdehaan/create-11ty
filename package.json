@@ -12,7 +12,8 @@
   "dependencies": {
     "arg": "^5.0.0",
     "fixpack": "^3.0.6",
-    "liquidjs": "^9.16.1"
+    "liquidjs": "^9.16.1",
+    "mkdirp": "^1.0.4"
   },
   "devDependencies": {},
   "homepage": "https://github.com/pdehaan/create-11ty#readme",
@@ -20,7 +21,6 @@
     "eleventy"
   ],
   "license": "MPL-2.0",
-  "main": "cli.js",
   "private": true,
   "repository": {
     "type": "git",
