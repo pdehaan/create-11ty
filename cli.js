@@ -5,6 +5,7 @@ const fs = require("fs");
 const path = require("path");
 
 const arg = require("arg");
+const fixpack = require("fixpack");
 const { Liquid } = require("liquidjs");
 
 const args = new arg({
@@ -32,5 +33,7 @@ for (const file of files) {
 
 cp.execSync("npm init -y");
 console.log("npm init started");
+
+fixpack("./package.json");
 
 console.info("Done!");
